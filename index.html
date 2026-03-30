@@ -89,9 +89,33 @@
     .verify-row.ok{color:var(--green);}
     .person-header{display:flex;align-items:center;gap:10px;padding:14px 16px 12px;border-bottom:1px solid var(--border);}
     .person-name{font-size:16px;font-weight:600;}
+
+    #pw-screen{position:fixed;inset:0;background:var(--bg);z-index:999;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 24px;}
+    #pw-screen.hidden{display:none;}
+    .pw-title{font-size:24px;font-weight:700;margin-bottom:8px;}
+    .pw-sub{font-size:14px;color:var(--text2);margin-bottom:32px;text-align:center;}
+    .pw-avatars{display:flex;margin-bottom:24px;}
+    .pw-input{width:100%;max-width:280px;padding:14px 16px;font-size:16px;border:1px solid var(--border-strong);border-radius:var(--radius-sm);background:var(--surface);color:var(--text);text-align:center;letter-spacing:2px;margin-bottom:12px;-webkit-appearance:none;}
+    .pw-input:focus{outline:none;border-color:var(--accent-l);}
+    .pw-btn{width:100%;max-width:280px;padding:14px;background:var(--text);color:var(--bg);border:none;border-radius:var(--radius-sm);font-size:16px;font-weight:600;cursor:pointer;}
+    .pw-error{font-size:13px;color:#c0392b;margin-top:8px;display:none;}
+
   </style>
 </head>
 <body>
+
+<div id="pw-screen">
+  <div class="pw-avatars">
+    <div class="avatar avatar-l" style="width:44px;height:44px;font-size:15px;">L</div>
+    <div class="avatar avatar-j" style="width:44px;height:44px;font-size:15px;margin-left:-8px;border:2px solid var(--bg);">J</div>
+  </div>
+  <div class="pw-title">Financiën</div>
+  <div class="pw-sub">Voer het wachtwoord in om verder te gaan</div>
+  <input class="pw-input" type="password" id="pw-input" placeholder="Wachtwoord" onkeydown="if(event.key==='Enter')checkPw()">
+  <button class="pw-btn" onclick="checkPw()">Inloggen</button>
+  <div class="pw-error" id="pw-error">Verkeerd wachtwoord, probeer opnieuw.</div>
+</div>
+
 <div class="topbar">
   <div class="topbar-inner">
     <div class="avatars">
@@ -319,6 +343,22 @@ function showTab(name,btn){
   document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
   document.getElementById('panel-'+name).classList.add('active');
   btn.classList.add('active');
+}
+
+
+const PW = 'LeenJente2025';
+function checkPw(){
+  const val=document.getElementById('pw-input').value;
+  if(val===PW){
+    localStorage.setItem('fin_auth','1');
+    document.getElementById('pw-screen').classList.add('hidden');
+  } else {
+    document.getElementById('pw-error').style.display='block';
+    document.getElementById('pw-input').value='';
+  }
+}
+if(localStorage.getItem('fin_auth')==='1'){
+  document.getElementById('pw-screen').classList.add('hidden');
 }
 
 calc();
