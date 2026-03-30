@@ -1,0 +1,25 @@
+{
+  "name": "Financi\u00ebn \u2014 Leen & Jente",
+  "short_name": "Financi\u00ebn",
+  "description": "Overschrijvingen SEB \u2192 Revolut \u2192 Belgi\u00eb",
+  "start_url": "/financien-app/",
+  "display": "standalone",
+  "background_color": "#f5f5f0",
+  "theme_color": "#f5f5f0",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "scope": "/financien-app/"
+}
